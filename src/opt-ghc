@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Verifica se um arquivo foi passado como argumento
+if [ -z "$1" ]; then
+    echo "Uso: $0 <arquivo.hs>"
+    exit 1
+fi
+
+ARQUIVO="$1"
+NOME_BASE="${ARQUIVO%.hs}"
+
+# Compila o arquivo Haskell
+if ghc "$ARQUIVO"; then
+    echo "Compilação bem-sucedida!"
+else
+    echo "Falha na compilação."
+    exit 1
+fi
+
+# Remove arquivos temporários
+rm -f "$NOME_BASE.hi" "$NOME_BASE.o"
+echo "Temporary files removed."
