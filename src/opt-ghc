@@ -20,3 +20,4 @@ fi
 # Remove arquivos temporários
 rm -f "$NOME_BASE.hi" "$NOME_BASE.o"
 echo "Temporary files removed."
+mv Main haskulues
