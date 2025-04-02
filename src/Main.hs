@@ -10,11 +10,11 @@ evaluateFunction :: String -> Double -> IO ()
 evaluateFunction funcStr x = catch (do
     let expr = "let x = " ++ show x ++ " in " ++ funcStr
     result <- readProcess "ghci" ["-e", expr] ""
-    putStrLn ("Resultado: " ++ result)
+    putStrLn ("Result: " ++ result)
   ) handleError
   where
     handleError :: SomeException -> IO ()
-    handleError e = hPutStrLn stderr ("Erro ao avaliar: " ++ show e)
+    handleError e = hPutStrLn stderr ("ERROR: " ++ show e)
 
 main :: IO ()
 main = do
@@ -22,5 +22,5 @@ main = do
     case args of
         [funcStr, numStr] -> case readMaybe numStr of
             Just x -> evaluateFunction funcStr x
-            Nothing -> putStrLn "Entrada inválida"
-        _ -> putStrLn "Uso: runhaskell Main.hs <funcao> <numero>"
+            Nothing -> putStrLn "INVALID INPUT"
+        _ -> putStrLn "USE: ./(binary name) Main.hs <function> <number>"
